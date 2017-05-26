@@ -1,11 +1,12 @@
 function Z = m1()
  load fisheriris;
+ format long;
  NumObs = size(meas,1);
  NameObs = strcat({'Obs '},num2str((1:NumObs)','%-d'));
- iris = dataset({nominal(species),'especie'},{meas,'largo_sepalo','ancho_sepalo','largo_petalo','ancho_petalo'},'ObsNames',NameObs);
- %disp(iris(1:5,:));
- %summary(iris);
- %disp (iris);
+ iris = dataset({nominal(species),'especie'},{meas,'largo_sepalo', 'ancho_sepalo','largo_petalo','ancho_petalo'},'ObsNames',NameObs);
+%  disp(iris(1:5,:));
+%  summary(iris);
+%  disp (iris);
 
 training=zeros(99,4);
 testing=zeros(51,4);
@@ -80,18 +81,34 @@ disp (confMat);
 % title('sepalos')
 hold on;
 xd=[];
-for i=1:3
-    for j=1:4
-        xd=[];
-        for k=1:50
-            xd(k)=meas((i-1)*50+k,j);              
-        end
-        
-        subplot(3,8,(i-1)*4+j);
-         hist(xd);
-        subplot(3,8,(i-1)*4+j+12);
-        boxplot(xd);
+% for i=1:3
+%     for j=1:4
+%         xd=[];
+%         for k=1:50
+%             xd(k)=meas((i-1)*50+k,j);              
+%         end
+%         
+%         subplot(3,8,(i-1)*4+j);
+%          hist(xd);
+%         subplot(3,8,(i-1)*4+j+12);
+%         boxplot(xd);
+%     end
+% end
+
+
+for start = 1:50:101
+    mu = zeros(4,1);
+    squared_sigma = zeros(4,1);
+    for i = 1:4
+        mu(i) = mean(meas(start:(start + 49),i));
+        squared_sigma(i) = sum((meas(start:(start + 49),i)-mu(i)) .^ 2) / length(meas(start:(start + 49),i));
+        s = std(meas(start:(start + 49),i));
+        t = tinv(0.95,49);
+        interval_min = mu(i) - t * s / sqrt(50)
+        interval_max = mu(i) + t * s / sqrt(50)
     end
+    mu;
+    squared_sigma;
 end
 
 %maxima verosimilud ?

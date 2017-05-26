@@ -1,22 +1,15 @@
-function p9 ()
 load hald;
 whos;
-mat = corrcoef(hald);
-% inmodel = sequeltialfs(fun,hald,heat);
+mat = corrcoef(ingredients);
 
-[coeff,score,latent] = princomp(hald); 
+[b,se,pval,inmodel,stats,nextstep,history]=stepwisefit(ingredients,heat);
+
+[coeff,score,latent] = princomp(ingredients); 
 % disp(coeff);
 % disp(score);
 % disp(latent);
-
+% latent
 varComp =cumsum(latent)./sum(latent) ;
-
-
-
-varComp
-
-disp asd;
-disp(u(:,1));
-disp asd;
-disp (latent)
-disp(s)
+% varComp
+ biplot(coeff(:,[1,2]),'score',score(:,[1,2]),'varlabels',{'tricalcium aluminate','tricalcium silicate', 'tetracalcium aluminoferrite','beta-dicalcium silicate'});
+inmodel
