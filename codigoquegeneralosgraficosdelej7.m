@@ -50,7 +50,7 @@ savedResids1 = zeros(length(xdata1), 2);
 [sortedXdata1, xInd1] = sort(xdata1);
 
 % Find coefficients for polynomial (order = 2)
-[fitResults1,~,mu1] = polyfit(xdata1,ydata1,2);
+[fitResults1,~,mu1] = polyfit(xdata1,ydata1,2)
 % Evaluate polynomial
 yplot1 = polyval(fitResults1,xplot1,[],mu1);
 
@@ -68,7 +68,7 @@ fitLine1 = plot(xplot1,yplot1,'DisplayName','   quadratic',...
 setLineOrder(axes1,fitLine1,scatter1);
 
 % Find coefficients for polynomial (order = 3)
-[fitResults1,~,mu1] = polyfit(xdata1,ydata1,3);
+[fitResults1,~,mu1] = polyfit(xdata1,ydata1,3)
 % Evaluate polynomial
 yplot2 = polyval(fitResults1,xplot1,[],mu1);
 
